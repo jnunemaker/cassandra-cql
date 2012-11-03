@@ -57,7 +57,18 @@ describe "row results" do
   it "should have two rows" do
     @result.rows.should eq(2)
   end
-  
+
+  it "should know size of rows" do
+    @result.size.should eq(2)
+  end
+
+  it "should know count of rows" do
+    @result.count.should eq(2)
+  end
+
+  it "should know length of rows" do
+    @result.length.should eq(2)
+  end
 
   describe "#each" do
     it "yields each row as a hash" do
