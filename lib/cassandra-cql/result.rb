@@ -37,6 +37,8 @@ module CassandraCQL
   end
   
   class Result
+    include Enumerable
+
     attr_reader :result, :schema, :cursor
 
     def initialize(result)
@@ -130,6 +132,10 @@ module CassandraCQL
           row.to_a
         end
       end
+    end
+
+    def each
+      fetch_hash { |row| yield row }
     end
   end
 end

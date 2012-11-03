@@ -58,6 +58,22 @@ describe "row results" do
     @result.rows.should eq(2)
   end
   
+
+  describe "#each" do
+    it "yields each row as a hash" do
+      rows = []
+      @result.each { |row| rows << row }
+      rows.should eq([
+        {"col1" => "val1", "col2" => "val2", "col3" => "val3", "col4" => nil},
+        {"col1" => nil, "col2" => nil, "col3" => nil, "col4" => "val4"}
+      ])
+    end
+  end
+
+  it "should be enumerable" do
+    @result.map { |row| row['col1'] }.should eq(['val1', nil])
+  end
+
   context "initialize" do
     it "should have a cursor set to 0" do
       @result.instance_variable_get(:@cursor).should eq(0)
